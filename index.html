@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MO Research Suite — Motilal Oswal Financial Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple: #5B21B6;
+      --purple-light: #7C3AED;
+      --green: #16A34A;
+      --text: #111827;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --bg: #FFFFFF;
+      --bg-alt: #F9FAFB;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 100;
+    }
+    nav .logo { font-family: 'Syne', sans-serif; font-size: 1rem; color: var(--purple); font-weight: 800; }
+    nav .badge { font-size: 0.75rem; background: var(--purple); color: white; padding: 0.25rem 0.75rem; border-radius: 999px; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+    .hero p {
+      font-size: 1.125rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 2rem;
+    }
+    .hero .links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .hero .links a {
+      padding: 0.6rem 1.5rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .hero .links a:hover { opacity: 0.8; }
+    .btn-primary { background: var(--purple); color: white; }
+    .btn-outline { border: 1.5px solid var(--border); color: var(--text); }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stat {
+      background: white;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .stat .number {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--purple);
+      display: block;
+    }
+    .stat .label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    section.alt { background: var(--bg-alt); }
+    .container { max-width: 960px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    p.lead { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 1.5rem; }
+
+    /* TWO COL */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+
+    @media (max-width: 700px) {
+      .two-col { grid-template-columns: 1fr; }
+      .two-col.reverse { direction: ltr; }
+    }
+
+    /* PHONE MOCKUP */
+    .phone-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .phone-wrap img {
+      width: 100%;
+      max-width: 280px;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      border: 1px solid var(--border);
+    }
+
+    /* BULLETS */
+    ul.feature-list { list-style: none; padding: 0; margin-top: 1.5rem; }
+    ul.feature-list li {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    ul.feature-list li::before {
+      content: "→";
+      color: var(--purple);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* METRICS TABLE */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .metric-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      background: white;
+    }
+    .metric-card .val {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--purple);
+    }
+    .metric-card .val.green { color: var(--green); }
+    .metric-card .desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      line-height: 1.5;
+    }
+
+    /* VALIDATION */
+    .validation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .val-card {
+      border-left: 3px solid var(--purple);
+      padding: 1.25rem 1.5rem;
+      background: white;
+      border-radius: 0 8px 8px 0;
+    }
+    .val-card h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .val-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+
+    /* SCREENSHOTS GRID */
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .screenshots img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--border); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer strong { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">MO Research Suite</span>
+  <span class="badge">ET BFSI Innovation Awards 2025</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="eyebrow">Motilal Oswal Financial Services · RIISE App · Live since January 2026</p>
+  <h1>Democratising 60 Years of Institutional Research</h1>
+  <p>AI-powered research intelligence for India's retail investor — live buy/sell recommendations, analyst report summaries, and conversational market insights, all in one app.</p>
+  <div class="links">
+    <a href="#products" class="btn-primary">See the Product</a>
+    <a href="#metrics" class="btn-outline">View Metrics</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats">
+  <div class="stat"><span class="number">250K+</span><span class="label">Monthly Unique Users</span></div>
+  <div class="stat"><span class="number">1M+</span><span class="label">Content Engagements / Month</span></div>
+  <div class="stat"><span class="number">₹50Cr+</span><span class="label">Monthly Order Flow Attributed</span></div>
+  <div class="stat"><span class="number">81</span><span class="label">Net Promoter Score</span></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">The Problem</p>
+    <h2>Institutional research existed. Access didn't.</h2>
+    <p class="lead">India has over 100 million demat accounts. But high-quality equity research — detailed, analyst-backed, conviction-rated — was locked behind 30-page PDFs, institutional language, and English-only delivery. The gap was never the research. It was accessibility.</p>
+    <p class="lead">The MO Research Suite closes that gap for the first time inside a regulated brokerage context — turning static reports into conversational, real-time intelligence available to every retail investor.</p>
+  </div>
+</section>
+
+<hr />
+
+<!-- PRODUCT 1: RESEARCH HOME -->
+<section id="products" class="alt">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <p class="section-label">Product 1</p>
+        <h2>Research Home</h2>
+        <p class="lead">A dedicated, always-on research surface embedded inside the RIISE trading app. Powered by an automated Lambda-based LLM pipeline that processes every analyst report without human intervention.</p>
+        <ul class="feature-list">
+          <li>Live equity and F&O calls curated by MO researchers — updated in real time</li>
+          <li>AI-generated daily market and commodity analysis</li>
+          <li>Every analyst report summarised in 500 words with audio playback</li>
+          <li>News feed with real-time sentiment signals</li>
+          <li>Covers equity, derivatives, and commodities</li>
+        </ul>
+      </div>
+      <div class="phone-wrap">
+        <img src="images/slide1.jpg" alt="Research Home screen" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT 2: RESEARCH ASSISTANT -->
+<section>
+  <div class="container">
+    <div class="two-col reverse">
+      <div>
+        <p class="section-label">Product 2</p>
+        <h2>MO Research Assistant</h2>
+        <p class="lead">A multi-agent AI assistant invoked from the centre of the app's navigation. Not a chatbot — a reasoning engine with access to live data, 350+ stock reports, 200+ screeners, and technical analysis tools.</p>
+        <ul class="feature-list">
+          <li>Live buy/sell recommendations backed by MO analyst research</li>
+          <li>200+ techno-fundamental smart screeners</li>
+          <li>Technical analysis — RSI, MACD, support and resistance</li>
+          <li>Natural language queries in English, Hindi, or Hinglish</li>
+          <li>Every response cited and traceable to source</li>
+          <li>Median response time: 10 seconds</li>
+        </ul>
+      </div>
+      <div class="phone-wrap">
+        <img src="images/slide2.jpg" alt="Research Assistant screen" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="alt">
+  <div class="container">
+    <p class="section-label">Product in Action</p>
+    <h2>From question to investment view — in 10 seconds</h2>
+    <p class="lead">A user asks "view on HDFC Bank" in plain language. The assistant orchestrates across live data, analyst research, and consensus intelligence — returning a structured investment view, cited and validated.</p>
+    <div class="screenshots">
+      <img src="images/slide2.jpg" alt="Research Assistant welcome" />
+      <img src="images/slide3.jpg" alt="Query being processed" />
+      <img src="images/slide4.jpg" alt="HDFC Bank investment view" />
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section>
+  <div class="container">
+    <p class="section-label">Demo</p>
+    <h2>See it in action</h2>
+    <p class="lead">Watch the MO Research Suite deliver live investment intelligence inside the RIISE trading app.</p>
+    <div style="margin-top:2rem; position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:16px; box-shadow: 0 20px 60px rgba(0,0,0,0.12);">
+      <iframe
+        src="https://www.youtube.com/embed/mB54Mx0c6AA"
+        title="MO Research Suite Demo"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:16px;">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section id="metrics">
+  <div class="container">
+    <p class="section-label">Performance Metrics</p>
+    <h2>Benchmarks & Outcomes</h2>
+    <p class="lead">All figures reflect monthly run-rate. Product live since January 2026. Continuously monitored via live observability dashboard — evaluated by the Business Strategy team and presented at CEO-level leadership reviews.</p>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="val">90%+</div>
+        <div class="desc">Response accuracy — continuously evaluated by MO Equity Research and Strategy teams against published analyst positions</div>
+      </div>
+      <div class="metric-card">
+        <div class="val">81</div>
+        <div class="desc">NPS — world-class benchmark. Apple scores ~72. Most financial services products sit between 30 and 50</div>
+      </div>
+      <div class="metric-card">
+        <div class="val">10s</div>
+        <div class="desc">Median response latency for reasoning-category multi-agent queries — comparable systems operate in 4–10 minutes</div>
+      </div>
+      <div class="metric-card">
+        <div class="val green">₹50Cr+</div>
+        <div class="desc">Monthly order flow directly attributed to Research Suite interactions — tracked via live production monitoring</div>
+      </div>
+      <div class="metric-card">
+        <div class="val">20K</div>
+        <div class="desc">Monthly AI queries on Research Assistant from 5,000 MAU — 4 queries per user, indicating active research behaviour</div>
+      </div>
+      <div class="metric-card">
+        <div class="val green">+40%</div>
+        <div class="desc">Organic engagement spike during Iran-US conflict — zero marketing spend, demonstrating earned trust under market stress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALIDATION -->
+<section class="alt">
+  <div class="container">
+    <p class="section-label">Independent Validation</p>
+    <h2>Governance & Evidence</h2>
+    <p class="lead">A three-layer governance chain ensures every number cited is organisationally validated — not self-reported by the product team.</p>
+    <div class="validation-grid">
+      <div class="val-card">
+        <h4>Business Strategy Team</h4>
+        <p>Independently evaluates all KPIs — order flow attribution, accuracy scores, engagement metrics — providing formal sign-off on reported outcomes.</p>
+      </div>
+      <div class="val-card">
+        <h4>Equity Research Team</h4>
+        <p>Continuously monitors response accuracy against published analyst research, price targets, and sector theses. The 90%+ figure reflects ongoing review, not a one-time test.</p>
+      </div>
+      <div class="val-card">
+        <h4>CEO Leadership Review</h4>
+        <p>Product KPIs are presented at leadership calls chaired by the CEO — the highest form of internal accountability in a regulated financial institution.</p>
+      </div>
+      <div class="val-card">
+        <h4>Franchise Testimonials</h4>
+        <p>Top-producing MO franchises — highest-revenue distribution partners — have provided direct testimonials on client engagement impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section>
+  <div class="container">
+    <p class="section-label">Compliance & Architecture</p>
+    <h2>Built for a regulated market</h2>
+    <p class="lead">Compliance is not a constraint retrofitted at the end — it is a design input from day one.</p>
+    <ul class="feature-list" style="margin-top:1.5rem; max-width:680px;">
+      <li>SEBI-compliant framework — responses grounded in published analyst research, not independent AI inference</li>
+      <li>DPDPA compliant by architecture — no client-specific data processed at the AI layer</li>
+      <li>On-premise deployment of client-facing models — no user data transmitted externally</li>
+      <li>Dual-model evaluation — an independent large-scale model evaluates every generation before delivery</li>
+      <li>Live guardrail layer validates numerical accuracy and analyst position alignment on every response</li>
+      <li>Citations provided on every response — fully traceable to source analyst report</li>
+      <li>Full observability stack with live monitoring dashboard across all agent decisions</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>MO Research Suite</strong> — Motilal Oswal Financial Services Ltd.</p>
+  <p style="margin-top:0.5rem;">AI Products Team · Mumbai, India · 2026</p>
+</footer>
+
+</body>
+</html>
